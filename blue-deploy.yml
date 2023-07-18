@@ -1,11 +1,19 @@
-apiVersion: v1
-kind: Service
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: web-app-blue-service
+  name: web-app-blue
 spec:
+  replicas: 1
   selector:
-    app: web-app-blue
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 80
+    matchLabels:
+      app: web-app-blue
+  template:
+    metadata:
+      labels:
+        app: web-app-blue
+    spec:
+      containers:
+        - name: web-app-blue
+          image: neysho/web-app-blue:1
+          ports:
+            - containerPort: 80
