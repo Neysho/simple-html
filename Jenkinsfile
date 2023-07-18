@@ -39,8 +39,8 @@ spec:
                     container('docker') {
                     // deleteDir()
                      checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'github-neysho', url: 'https://github.com/Neysho/simple-html.git']])
-                      sh 'ls'
-                      sh 'docker build -t neysho/web-app-blue:1 . -f blue/Dockerfile'
+                      sh 'cd blue'
+                      sh 'docker build -t neysho/web-app-blue:1 .'
                       sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
                       sh 'docker push neysho/web-app-blue:1'
                }
